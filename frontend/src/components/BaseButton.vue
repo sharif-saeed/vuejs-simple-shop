@@ -1,22 +1,3 @@
-<!-- <template>
-  <button 
-    :type="type" 
-    @click="$emit('click')" 
-    class="base-button"
-  >
-    <slot></slot>
-  </button>
-</template>
-
-<script setup>
-defineProps({
-  type: {
-    type: String,
-    default: 'button'
-  }
-});
-</script> -->
-
 <template>
   <button 
     :type="type"
@@ -38,7 +19,7 @@ const props = defineProps({
 const emit = defineEmits(["click"]);
 
 function handleClick(event) {
-  emit("click", event);   // فقط یک بار emit می‌شود
+  emit("click", event);
 }
 </script>
 

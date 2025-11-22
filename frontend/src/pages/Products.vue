@@ -2,7 +2,6 @@
   <div>
     <h1>Products</h1>
 
-    <!-- Category filter -->
     <div>
       <label>Filter by Category:</label>
       <select v-model="category" @change="onCategoryChange">
@@ -13,15 +12,12 @@
       </select>
     </div>
 
-    <!-- Results count -->
     <p>Number of results: <strong>{{ count }}</strong></p>
 
-    <!-- Products list -->
     <div>
       <ProductBox v-for="p in products" :key="p.id" :product="p" />
     </div>
 
-    <!-- Pagination -->
     <div style="margin-top: 16px;">
       <BaseButton @click="prevPage" :disabled="page === 1">Previous</BaseButton>
       <span style="margin: 0 8px;">{{ page }}</span>
@@ -35,14 +31,12 @@ import { ref, onMounted } from 'vue';
 import BaseButton from '../components/BaseButton.vue';
 import ProductBox from '../components/ProductBox.vue';
 
-// State
 const products = ref([]);
-const count = ref(0);   // number of products after filter
+const count = ref(0);  
 const page = ref(1);
 const limit = 10;
 const category = ref("");
 
-// Categories (fixed array)
 const categories = [
   "Beverages", "Condiments", "Oil", "Jams, Preserves",
   "Dried Fruit & Nuts", "Sauces", "Canned Fruit & Vegetables",
@@ -50,7 +44,6 @@ const categories = [
   "Grains", "Pasta", "Dairy products", "Cereal", "Chips, Snacks"
 ];
 
-// Fetch products
 async function fetchProducts(currentPage = page.value) {
   let url = `http://localhost:3000/api/products?page=${currentPage}&limit=${limit}`;
 
@@ -74,7 +67,6 @@ async function fetchProducts(currentPage = page.value) {
 }
 
 
-// Pagination
 function nextPage() {
   if (page.value * limit < count.value) fetchProducts(page.value + 1);
 }
@@ -83,13 +75,11 @@ function prevPage() {
   if (page.value > 1) fetchProducts(page.value - 1);
 }
 
-// Reset page when category changes
 function onCategoryChange() {
   page.value = 1;
   fetchProducts(1);
 }
 
-// Initial fetch
 onMounted(() => {
   fetchProducts();
 });
