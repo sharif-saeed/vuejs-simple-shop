@@ -44,26 +44,20 @@ const categories = [
   "Grains", "Pasta", "Dairy products", "Cereal", "Chips, Snacks"
 ];
 
-async function fetchProducts(currentPage = page.value) {
-  let url = `http://localhost:3000/api/products?page=${currentPage}&limit=${limit}`;
+async function fetchProducts(currentPage = page.value){
+    let url = `http://localhost:3000/api/products?page=${currentPage}&limit=${limit}`
 
-  if (category.value) {
-    url += `&category=${encodeURIComponent(category.value)}`;
-  }
+    if(category.value){
+        url += `&category=${encodeURIComponent(category.value)}`
+    }
 
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    const data = await res.json();
+    const res = await fetch(url)
+    if(!res.ok) console.log("Error")
+    const data = await res.json()
 
-    products.value = data.results;
-    count.value = data.count;
-    page.value = currentPage;
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    products.value = [];
-    count.value = 0;
-  }
+    products.value = data.results
+    count.value = data.count
+    page.value = currentPage
 }
 
 
