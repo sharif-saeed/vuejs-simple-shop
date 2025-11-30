@@ -3,7 +3,6 @@ import { getProducts } from '../services/productsService.js';
 
 const router = express.Router();
 
-// مسیر GET /api/products
 router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;

@@ -24,6 +24,11 @@
       </div>
 
       <h2>Total Price: {{ cart.totalPrice }} $</h2>
+
+      <router-link to="/checkout">
+        <BaseButton>Checkout</BaseButton>
+      </router-link>
+      
     </div>
   </div>
 </template>

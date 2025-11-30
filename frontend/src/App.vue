@@ -7,7 +7,7 @@
       <h1>Shop-Web</h1>
     </template>
     <template #thirdPart>
-      <router-link to="/cart">Cart</router-link>
+      <router-link to="/cart">Cart {{ cart.totalItems }}</router-link>
     </template>
   </BaseNavBar>
 
@@ -22,6 +22,8 @@
 
 <script setup>
 import BaseNavBar from './components/BaseNavBar.vue';
+import { useCartStore } from './stores/cartStore';
+const cart = useCartStore()
 </script>
 
 <style>

@@ -88,20 +88,17 @@ onMounted(() => {
 
 
 <style scoped>
-/* کانتینر اصلی */
 div {
   padding: 24px;
   font-family: sans-serif;
 }
 
-/* عنوان اصلی */
 h1 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 16px;
 }
 
-/* فیلتر دسته‌بندی */
 label {
   display: block;
   font-weight: 600;
@@ -117,20 +114,17 @@ select {
   margin-bottom: 16px;
 }
 
-/* متن تعداد نتایج */
 p {
   margin-bottom: 12px;
   color: #555;
 }
 
-/* لیست محصولات به صورت grid */
 div > ProductCard {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
 }
 
-/* صفحه‌بندی */
 div > BaseButton {
   margin-right: 8px;
   margin-top: 16px;
