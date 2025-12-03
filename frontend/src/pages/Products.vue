@@ -4,11 +4,25 @@
 
     <div>
       <label>Filter by Category:</label>
-      <select v-model="category" @change="onCategoryChange">
+      <select v-model="category" @change="onFilterChange">
         <option value="">All</option>
         <option v-for="c in categories" :key="c" :value="c">
           {{ c }}
         </option>
+      </select>
+    </div>
+
+    <div>
+      <label>Search by Name: </label>
+      <input v-model="search" @input="onFilterChange" placeholder="Search...">
+    </div>
+
+    <div>
+      <label >Sort by Price: </label>
+      <select v-model="sort" @change="onFilterChange">
+        <option value="">Default</option>
+        <option value="asc">Price: Low > Hight</option>
+        <option value="desc">Price: High > Low</option>
       </select>
     </div>
 
@@ -35,7 +49,10 @@ const products = ref([]);
 const count = ref(0);  
 const page = ref(1);
 const limit = 10;
+
 const category = ref("");
+const search = ref("")
+const sort = ref("")
 
 const categories = [
   "Beverages", "Condiments", "Oil", "Jams, Preserves",
@@ -47,9 +64,10 @@ const categories = [
 async function fetchProducts(currentPage = page.value){
     let url = `http://localhost:3000/api/products?page=${currentPage}&limit=${limit}`
 
-    if(category.value){
-        url += `&category=${encodeURIComponent(category.value)}`
-    }
+    if(category.value) url += `&category=${encodeURIComponent(category.value)}`
+    if(search.value) url += `&search=${encodeURIComponent(search.value)}`
+    if(sort.value) url += `&sort=${sort.value}`
+
 
     const res = await fetch(url)
     if(!res.ok) console.log("Error")
@@ -69,7 +87,7 @@ function prevPage() {
   if (page.value > 1) fetchProducts(page.value - 1);
 }
 
-function onCategoryChange() {
+function onFilterChange() {
   page.value = 1;
   fetchProducts(1);
 }

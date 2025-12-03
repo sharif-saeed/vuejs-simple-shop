@@ -17,7 +17,7 @@ export async function createOrder({customer, items}){
 
     for(const item of items){
        await connection.query(
-        `INSERT INTO details_order
+        `INSERT INTO order_details
         (order_id, product_id, quantity, unit_price)
         VALUES (?, ?, ?, ?)`,
         [orderId, item.product.id, item.qty, item.product.list_price]
